@@ -5,3 +5,16 @@
     font-size: 30px;
 }
 
+.search-card {
+    padding: 10px;
+}
+
+.search-card:hover {
+    cursor: pointer;
+}
+
+#clear {
+    transform: translateX(50%);
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
