@@ -10,9 +10,13 @@ $(document).ready(function() {
   searchHistory();
   lastResult();
   
-  searchBtn.click(newSearch);
   $(".search-card").click(displayWeather);
-    
+  searchBtn.click(newSearch);
+  $(".form-control").keypress(function(event) {
+    if (event.keyCode == 13) {
+      newSearch();
+    }
+  });
 
   function newSearch() {
 
@@ -77,15 +81,17 @@ $(document).ready(function() {
       currentWeather.append(cityName).append(tempF).append(humidity).append(windSpeed);
       
       storedCities.push(response.name);
-      // console.log(storedCities);
       localStorage.setItem("cities", JSON.stringify(storedCities));
       
       $("#search-history").empty();
       searchHistory();
+
       $(".search-card").click(displayWeather);
 
     });
 
+    $(".form-control").val('');
+    
   } 
 
 
