@@ -3,6 +3,7 @@ $(document).ready(function() {
   let apiKey = "69de6a59efcfe98cdc7b78dff1d7d1b2";
   let searchBtn = $("#button-addon2");
   let currentWeather = $("#current-weather");
+  let forecastWeather = $(".forecast-area");
 
   let storedCities = JSON.parse(localStorage.getItem("cities")) || [];
 
@@ -53,6 +54,20 @@ $(document).ready(function() {
           $(".uv-index").css("background-color", "red");
         }
 
+        for (let i = 1; i < 6; i++) {
+          let forecastArea = $(".forecast-area");
+          let newForecast = $("<div>").addClass("card col text-white bg-primary mb-3 forecast-card");
+
+          let forecastDate = $("<strong>").addClass("forecast-date").text(moment().add(i, 'days').format('l'))
+          let forecastIcon = $("<img>").attr("src", "assets/icons/" + response.daily[i].weather[0].icon + ".png");
+          let forecastTemp = $("<p>").text("Temperature: " + ((response.daily[i].temp.day - 273.15) * 1.8 + 32).toFixed(2) + "\u00B0" + "F");
+          let forecastHumidity = $("<p>").text("Humidity: " + response.daily[i].humidity + "%");
+
+          forecastArea.append(newForecast);
+          newForecast.append(forecastDate).append(forecastIcon).append(forecastTemp).append(forecastHumidity);
+
+        }
+
       });
 
       currentWeather.append(cityName).append(tempF).append(humidity).append(windSpeed);
@@ -70,17 +85,10 @@ $(document).ready(function() {
   } 
 
 
-  function searchHistory() {
-    for (let i = 0; i < storedCities.length; i++) {
-      let cityPrepend = $("<div>").addClass("card search-card").attr("data-name", storedCities[i]).text(storedCities[i]);
-      $("#search-history").prepend(cityPrepend);
-    }
-  }
-
-
   function displayWeather() {
 
     currentWeather.empty();
+    forecastWeather.empty();
 
     let city = $(this).attr("data-name");
     let queryCurrent = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
@@ -118,18 +126,42 @@ $(document).ready(function() {
           $(".uv-index").css("background-color", "red");
         }
 
+        for (let i = 1; i < 6; i++) {
+          let forecastArea = $(".forecast-area");
+          let newForecast = $("<div>").addClass("card col text-white bg-primary mb-3 forecast-card");
+
+          let forecastDate = $("<strong>").addClass("forecast-date").text(moment().add(i, 'days').format('l'))
+          let forecastIcon = $("<img>").attr("src", "assets/icons/" + response.daily[i].weather[0].icon + ".png");
+          let forecastTemp = $("<p>").text("Temperature: " + ((response.daily[i].temp.day - 273.15) * 1.8 + 32).toFixed(2) + "\u00B0" + "F");
+          let forecastHumidity = $("<p>").text("Humidity: " + response.daily[i].humidity + "%");
+
+          forecastArea.append(newForecast);
+          newForecast.append(forecastDate).append(forecastIcon).append(forecastTemp).append(forecastHumidity);
+
+        }
+
       });
 
       currentWeather.append(cityName).append(tempF).append(humidity).append(windSpeed);
-      
+
     });
 
+  }
+
+
+
+  function searchHistory() {
+    for (let i = 0; i < storedCities.length; i++) {
+      let cityPrepend = $("<div>").addClass("card search-card").attr("data-name", storedCities[i]).text(storedCities[i]);
+      $("#search-history").prepend(cityPrepend);
+    }
   }
 
 
   $("#clear").click(function() {
     localStorage.removeItem("cities");
     currentWeather.empty();
+    forecastWeather.empty();
     $("#search-history").empty();
     storedCities = [];
   });
