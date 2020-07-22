@@ -16,6 +16,7 @@ $(document).ready(function() {
   function newSearch() {
 
     currentWeather.empty();
+    forecastWeather.empty();
 
     let city = $("#city-name").val();
     let queryCurrent = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
