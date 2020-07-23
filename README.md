@@ -15,4 +15,4 @@ Current weather section provides the following data:
 
 https://raytieu.github.io/weather-dashboard/
 
-![weather dashboard](assets/weather_dashboard.png)
+![weather dashboard](assets/weather.png)
