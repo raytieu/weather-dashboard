@@ -1,3 +1,4 @@
+/* Styling for the Banner at top of page */
 .header {
     background-color: blue !important;
     justify-content: center;
@@ -5,6 +6,7 @@
     font-size: 30px;
 }
 
+/* Styling for each city in search history */
 .search-card {
     padding: 10px;
 }
@@ -13,28 +15,33 @@
     cursor: pointer;
 }
 
+/* Styling for clear button */
 #clear {
     transform: translateX(50%);
     margin-bottom: 10px;
     margin-top: 20px;
 }
 
+/* Styling for the UV Index value */
 .uv-index {
     color: white;
     padding: 5px;
     border-radius: 5px;
 }
 
+/* Spacing on top of 5-day forecast section */
 .five-day {
     margin-top: 10px;
 }
 
+/* Styling for the date text in each weather section */
 .forecast-date {
     font-size: 20px;
     padding: 10px;
     text-align: center;
 }
 
+/* Styling for each card in the 5-day Forecast */
 .forecast-card {
     margin-left: 10px;
     margin-right: 10px;
