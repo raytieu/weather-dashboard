@@ -64,7 +64,7 @@ $(document).ready(function() {
 
         for (let i = 1; i < 6; i++) {
           let forecastArea = $(".forecast-area");
-          let newForecast = $("<div>").addClass("card col text-white bg-primary mb-3 forecast-card");
+          let newForecast = $("<div>").addClass("card col-xs-12 col-s text-white bg-primary mb-3 forecast-card");
 
           let forecastDate = $("<strong>").addClass("forecast-date").text(moment().add(i, 'days').format('l'))
           let forecastIcon = $("<img>").attr("src", "assets/icons/" + response.daily[i].weather[0].icon + ".png");
@@ -80,8 +80,10 @@ $(document).ready(function() {
 
       currentWeather.append(cityName).append(tempF).append(humidity).append(windSpeed);
       
-      storedCities.push(response.name);
-      localStorage.setItem("cities", JSON.stringify(storedCities));
+      if (storedCities.indexOf(response.name) === -1) {
+        storedCities.push(response.name);
+        localStorage.setItem("cities", JSON.stringify(storedCities));
+      }
       
       $("#search-history").empty();
       searchHistory();
@@ -121,7 +123,6 @@ $(document).ready(function() {
         url: queryForecast,
         method: "GET"
       }).then(function(response) {
-        console.log(response);
 
         let uvIndex = $("<p>").text("UV Index: ").append($("<span>").addClass("uv-index").text(response.current.uvi));
         currentWeather.append(uvIndex);
@@ -140,7 +141,7 @@ $(document).ready(function() {
 
         for (let i = 1; i < 6; i++) {
           let forecastArea = $(".forecast-area");
-          let newForecast = $("<div>").addClass("card col text-white bg-primary mb-3 forecast-card");
+          let newForecast = $("<div>").addClass("card col-xs-12 col-s text-white bg-primary mb-3 forecast-card");
 
           let forecastDate = $("<strong>").addClass("forecast-date").text(moment().add(i, 'days').format('l'))
           let forecastIcon = $("<img>").attr("src", "assets/icons/" + response.daily[i].weather[0].icon + ".png");
@@ -187,7 +188,6 @@ $(document).ready(function() {
         url: queryForecast,
         method: "GET"
       }).then(function(response) {
-        console.log(response);
 
         let uvIndex = $("<p>").text("UV Index: ").append($("<span>").addClass("uv-index").text(response.current.uvi));
         currentWeather.append(uvIndex);
@@ -206,7 +206,7 @@ $(document).ready(function() {
 
         for (let i = 1; i < 6; i++) {
           let forecastArea = $(".forecast-area");
-          let newForecast = $("<div>").addClass("card col text-white bg-primary mb-3 forecast-card");
+          let newForecast = $("<div>").addClass("card col-xs-12 col-s text-white bg-primary mb-3 forecast-card");
 
           let forecastDate = $("<strong>").addClass("forecast-date").text(moment().add(i, 'days').format('l'))
           let forecastIcon = $("<img>").attr("src", "assets/icons/" + response.daily[i].weather[0].icon + ".png");
